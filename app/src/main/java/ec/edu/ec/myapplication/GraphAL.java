@@ -5,9 +5,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class GraphAL<Aeropuerto, String> {
-   private LinkedList<Vertex<Aeropuerto, String>> vertices;
-   private boolean isDirected;
-   private Comparator<Aeropuerto> cmp;
+    private LinkedList<Vertex<Aeropuerto, String>> vertices;
+    private boolean isDirected;
+    private Comparator<Aeropuerto> cmp;
 
     public GraphAL() {
         this.isDirected = isDirected;
@@ -16,26 +16,26 @@ public class GraphAL<Aeropuerto, String> {
     public LinkedList<Vertex<Aeropuerto, String>> getVertices(){
         return vertices;
     }
-     public Vertex<Aeropuerto, String> findVertex(Aeropuerto content) {
+    public Vertex<Aeropuerto, String> findVertex(Aeropuerto content) {
         if (content == null) return null;
         if (vertices.isEmpty()) return null;
-        
+
         Iterator<Vertex<Aeropuerto, String>> it = vertices.iterator();
         while (it.hasNext()) {
             Vertex<Aeropuerto, String> vertice = it.next();
-            if (this.cmp.compare(content, vertice.getContent()) == 0) {
+            if (this.cmp.compare(content, vertice.getAeropuerto()) == 0) {
                 return vertice;
             }
         }
         return null;
     }
-    
+
     public boolean addVertex(Aeropuerto content) {
         if (content == null || findVertex(content) == null) return false;
-        
+
         Vertex<Aeropuerto, String> vertice = new Vertex<>(content);
         this.vertices.add(vertice);
-        
+
         return true;
     }
 

@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void mostrarAeropuertos() {
         for (Aeropuerto a : grafo.getAeropuertos()) {
-            GeoPoint punto = new GeoPoint(a.getLat(), a.getLon());
+            GeoPoint punto = new GeoPoint(a.getLatitud(), a.getLongitud());
             Marker marker = new Marker(map);
             marker.setPosition(punto);
             marker.setTitle(a.getNombre());
@@ -65,8 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void mostrarVuelos() {
         for (Vuelo v : grafo.getVuelos()) {
-            GeoPoint origen = new GeoPoint(v.getOrigen().getContent().getLat(), v.getOrigen().getContent().getLon());
-            GeoPoint destino = new GeoPoint(v.getDestino().getContent().getLat(), v.getDestino().getContent().getLon());
+            Aeropuerto Aorigen = (Aeropuerto)v.getOrigen().getAeropuerto();
+            Aeropuerto Adestino = (Aeropuerto)v.getOrigen().getAeropuerto();
+            GeoPoint origen = new GeoPoint(Aorigen.getLatitud(), Aorigen.getLongitud());
+            GeoPoint destino = new GeoPoint(Adestino.getLatitud(), Adestino.getLongitud());
 
             Polyline line = new Polyline();
             line.addPoint(origen);
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         if (!ruta.isEmpty()) {
             Polyline polyline = new Polyline();
             for (Aeropuerto a : ruta) {
-                polyline.addPoint(new GeoPoint(a.getLat(), a.getLon()));
+                polyline.addPoint(new GeoPoint(a.getLatitud(), a.getLongitud()));
             }
             polyline.setWidth(6f);
             polyline.setColor(0xFFFF0000); // Rojo

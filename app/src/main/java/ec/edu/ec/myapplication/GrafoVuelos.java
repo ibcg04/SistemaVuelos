@@ -24,7 +24,7 @@ public class GrafoVuelos {
     public LinkedList<Aeropuerto> getAeropuertos() {
         LinkedList<Aeropuerto> lista = new LinkedList<>();
         for (Vertex<Aeropuerto, String> v : grafo.getVertices()) {
-            lista.add(v.getContent());
+            lista.add(v.getAeropuerto());
         }
         return lista;
     }
@@ -38,14 +38,14 @@ public class GrafoVuelos {
     }
 
     // Algoritmo de Dijkstra
-    public List<Aeropuerto> dijkstra(Aeropuerto origen, Aeropuerto destino) {
+    public LinkedList<Aeropuerto> dijkstra(Aeropuerto origen, Aeropuerto destino) {
         Map<Vertex<Aeropuerto, String>, Integer> dist = new HashMap<>();
         Map<Vertex<Aeropuerto, String>, Vertex<Aeropuerto, String>> prev = new HashMap<>();
         Set<Vertex<Aeropuerto, String>> visitados = new HashSet<>();
 
         Vertex<Aeropuerto, String> vOrigen = grafo.findVertex(origen);
         Vertex<Aeropuerto, String> vDestino = grafo.findVertex(destino);
-        if (vOrigen == null || vDestino == null) return new ArrayList<>();
+        if (vOrigen == null || vDestino == null) return new LinkedList<>();
 
         // Inicialización
         for (Vertex<Aeropuerto, String> v : grafo.getVertices()) {
@@ -79,12 +79,11 @@ public class GrafoVuelos {
             }
         }
 
-        if (dist.get(vDestino) == Integer.MAX_VALUE) return new ArrayList<>();
+        if (dist.get(vDestino) == Integer.MAX_VALUE) return new LinkedList();
 
-        // Reconstrucción de ruta (aquí va el cambio clave)
         LinkedList<Aeropuerto> ruta = new LinkedList<>();
         for (Vertex<Aeropuerto, String> paso = vDestino; paso != null; paso = prev.get(paso)) {
-            ruta.addFirst(paso.getContent());   // ✅ getContent() en Vertex, NO getData()
+            ruta.addFirst(paso.getAeropuerto());
         }
         return ruta;
     }

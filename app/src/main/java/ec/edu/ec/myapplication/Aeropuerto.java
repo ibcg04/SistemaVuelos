@@ -1,18 +1,18 @@
 package ec.edu.ec.myapplication;
 public class Aeropuerto {
     private String nombre;
-    private double lat;
-    private double lon;
+    private double latitud;
+    private double longitud;
 
     public Aeropuerto(String nombre, double lat, double lon) {
         this.nombre = nombre;
-        this.lat = lat;
-        this.lon = lon;
+        this.latitud = lat;
+        this.longitud = lon;
     }
 
     public String getNombre() { return nombre; }
-    public double getLat() { return lat; }
-    public double getLon() { return lon; }
+    public double getLatitud() { return latitud; }
+    public double getLongitud() { return longitud; }
 
     @Override
     public String toString() {
