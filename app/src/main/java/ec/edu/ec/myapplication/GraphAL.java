@@ -38,22 +38,22 @@ public class GraphAL<Aeropuerto, String> {
         
         return true;
     }
-    
+
     public boolean connect(Aeropuerto content1, Aeropuerto content2, int weight, String data){
         if (content1==null || content2==null) return false;
-        
+
         Vertex<Aeropuerto, String> v1= findVertex(content1);
         Vertex<Aeropuerto, String> v2= findVertex(content2);
-        
+
         if (v1 == null || v2 == null){
             return false;
         }
-        Vuelo<String, Aeropuerto> nuevasAristas = new Vuelo<>(v1, v2, weight, data);
+        Vuelo<Aeropuerto, String > nuevasAristas = new Vuelo<>(v1, v2, weight, data);
         v1.getEdges().add(nuevasAristas);
 
         if (!this.isDirected){
-        Vuelo<String, Aeropuerto> reverseEdge = new Vuelo<>(v2, v1, weight, data);
-        v2.getEdges().add(reverseEdge);
+            Vuelo<Aeropuerto, String > reverseEdge = new Vuelo<>(v2, v1, weight, data);
+            v2.getEdges().add(reverseEdge);
         }
 
         return true;
